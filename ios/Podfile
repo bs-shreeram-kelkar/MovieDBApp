@@ -38,3 +38,5 @@ target 'MovieDBApp' do
     )
   end
 end
+# WatermelonDB dependency
+pod 'simdjson', path: '../node_modules/@nozbe/simdjson', modular_headers: true

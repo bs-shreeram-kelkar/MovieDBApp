@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TextInput, Button, Text, useTheme } from 'react-native-paper';
+import { TextInput, Button, Text, useTheme,HelperText} from 'react-native-paper';
 import AppDialog from './AppDialog';
 
 const Login = ({ navigation }) => {
@@ -21,6 +21,10 @@ const Login = ({ navigation }) => {
     }
   };
 
+  function hasErrors() {
+    return userId.length < 5 && userId.length > 0
+  }
+
   return (
     <View style={styles.container}>
       <Text style={[styles.title, { color: colors.primary }]}>Login</Text>
@@ -31,6 +35,9 @@ const Login = ({ navigation }) => {
         mode="outlined"
         style={styles.input}
         />
+      <HelperText type="error" visible={hasErrors()}>
+        User ID is invalid!
+      </HelperText>
       <TextInput
         label="Password"
         value={password}
