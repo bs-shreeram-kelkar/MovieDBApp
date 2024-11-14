@@ -1,23 +1,21 @@
 // database/saveMovies.js
-import { database } from './index';
-import Movie from '../models/Movies';
+import database from ".";
+import Movie from '../models/Movie';
 
-export const saveMovies = async (movies) => {
+export const saveMovies = async (movie) => {
   try {
     await database.write(async () => {
-      await Promise.all(
-        movies.map(async (movie) => {
-          await database.collections.get('movies').create((movieRecord) => {
-            movieRecord.movieId = movie.id;
-            movieRecord.title = movie.title;
-            movieRecord.overview = movie.overview || '';
-            movieRecord.releaseDate = movie.release_date || '';
-            movieRecord.popularity = movie.popularity;
-          });
-        })
-      );
+      console.log(movie.id)
+      await database.collections.get('movies').create((movieRecord) => {
+        movieRecord._raw.id = movie.id.toString() // Use `_raw` to access WatermelonDB's `id`
+        movieRecord.movieId = movie.movieId
+        movieRecord.title = movie.title
+        movieRecord.overview = movie.overview || '';
+        movieRecord.releaseDate = movie.release_date || '';
+        movieRecord.popularity = 12.0
+      });
     });
-  } catch (error) {
+    } catch (error) {
     console.error('Error saving movies:', error);
   }
 };

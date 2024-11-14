@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "reset-db": "node resetDatabase.js"
   },
   "dependencies": {
     "@babel/plugin-transform-private-methods": "^7.25.9",

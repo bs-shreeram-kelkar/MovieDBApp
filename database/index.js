@@ -2,17 +2,18 @@
 import { Database } from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
-import Movie from '../models/Movies';
-import { movieSchema } from './schema/movieSchema';
+import Movie from '../models/Movie';
+import schema from './schema/movieSchema';
 
 const adapter = new SQLiteAdapter({
-  schema: {
-    version: 1,
-    tables: [movieSchema],
-  },
+  schema,
+  // other options like migrations, if any
 });
 
-export const database = new Database({
+const database = new Database({
   adapter,
-  modelClasses: [Movie],
+  modelClasses: [Movie],  // Add Movie here
+  actionsEnabled: true,
 });
+
+export default database;

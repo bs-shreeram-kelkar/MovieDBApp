@@ -1,14 +1,21 @@
 // schema/movieSchema.js
-import { tableSchema } from '@nozbe/watermelondb';
+import { appSchema, tableSchema } from '@nozbe/watermelondb';
 
-export const movieSchema = tableSchema({
-  name: 'movies',
-  columns: [
-    { name: 'id', type: 'number' },
-    { name: 'title', type: 'string' },
-    { name: 'overview', type: 'string', isOptional: true },
-    { name: 'release_date', type: 'string', isOptional: true },
-    { name: 'popularity', type: 'number', isOptional: true },
-    { name: 'backdrop_path', type: 'string'},
+const schema = appSchema({
+  version: 1,
+  tables: [
+    tableSchema({
+      name: 'movies',  // Ensure this matches `static table` in Movie.js
+      columns: [
+        { name: 'movie_id', type: 'string' },
+        { name: 'title', type: 'string' },
+        { name: 'overview', type: 'string' },
+        { name: 'release_date', type: 'string' },
+        { name: 'popularity', type: 'number' },
+      ],
+    }),
   ],
 });
+
+export default schema;
+

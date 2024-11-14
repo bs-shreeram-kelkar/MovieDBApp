@@ -5,8 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
-import Login from './Login';
 import ImageDisplay from './ImageDisplay';
+import Login from './login';
+import SavedMovieList from './SavedMovieList';
 
 import { CombinedDarkTheme } from './theme';
 
@@ -56,13 +57,7 @@ function HomeTabStack() {
 
 function FavTab() {
     return (
-        <View>
-        <ImageDisplay 
-            url="https://image.tmdb.org/t/p/w500//3V4kLQg0kSqPLctI5ziYWabAZYF.jpg" 
-            width={200} 
-            height={200} 
-        />
-        </View>
+      <SavedMovieList />
     );
 }
 
