@@ -8,11 +8,17 @@ import DetailsScreen from './DetailsScreen';
 import ImageDisplay from './ImageDisplay';
 import Login from './login';
 import SavedMovieList from './SavedMovieList';
+import MovieDetailScreen from './MovieDetailScreen';
 
 import { CombinedDarkTheme } from './theme';
 
 import { View,List } from 'react-native';
 import { Text } from 'react-native-paper'
+
+
+import ProfileScreen from './ProfileScreen';
+import UserDetailsTab from './UserDetailsTab';
+
 
 
 const Stack = createStackNavigator();
@@ -31,6 +37,10 @@ export function TabScreen() {
             iconName = 'home-outline';
           } else if (route.name === 'FavTab') {
             iconName = 'information-circle-outline';
+          } else if (route.name == "ProfileScreen") {
+            iconName = "archive-outline"
+          } else if (route.name == "UserDetailsTab") {
+            iconName = "attach-outline"
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -41,16 +51,22 @@ export function TabScreen() {
     >
       <Tab.Screen name="HomeTab" component={HomeTabStack} />
       <Tab.Screen name="FavTab" component={FavTab} />
+      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Tab.Screen name="UserDetailsTab" component={UserDetailsTab} />
+
     </Tab.Navigator>
   );
 }
 
 // Home stack for tab navigation
 function HomeTabStack() {
+  
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
+
     </Stack.Navigator>
   );
 }

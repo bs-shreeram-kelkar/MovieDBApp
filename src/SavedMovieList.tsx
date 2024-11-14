@@ -45,9 +45,9 @@ const SavedMovieList = () => {
                 height={120} 
             />
             <Text variant="labelSmall" >{item.title}</Text>
-            <View style={{ flex: 1, flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row'}}>
               <Icon source="star" size={12}/> 
-              <Text  variant="labelSmall"> {item.vote_average} / 10</Text>
+              <Text  variant="labelSmall"> {item.vote_average} / 10</Text> */}
             </View>
           </View>
           </TouchableRipple>

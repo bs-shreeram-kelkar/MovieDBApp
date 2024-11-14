@@ -2,7 +2,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb';
 
 const schema = appSchema({
-  version: 1,
+  version: 4,
   tables: [
     tableSchema({
       name: 'movies',  // Ensure this matches `static table` in Movie.js
@@ -12,6 +12,8 @@ const schema = appSchema({
         { name: 'overview', type: 'string' },
         { name: 'release_date', type: 'string' },
         { name: 'popularity', type: 'number' },
+        { name: 'backdrop_path', type: 'string'},
+        { name: 'vote_average' ,type: 'string'}
       ],
     }),
   ],

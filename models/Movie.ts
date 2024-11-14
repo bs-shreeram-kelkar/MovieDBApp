@@ -10,5 +10,7 @@ export default class Movie extends Model {
   @field('overview') overview;
   @field('release_date') releaseDate;
   @field('popularity') popularity;
+  @field('backdrop_path') backdrop_path;
+  @field('vote_average') vote_average;
 }
 

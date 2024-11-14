@@ -5,8 +5,9 @@ import { getMovies } from './Api/getMovies';
 import { List, Text,Icon,Button, TouchableRipple} from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
 import { saveMovies } from '../database/saveMovies';
+import { homenavigationRef } from './App';
 
-const MovieListScreen = () => {
+const MovieListScreen = ({ navigation }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -40,6 +41,10 @@ const MovieListScreen = () => {
             onPress={() => 
               {
                 console.log('Pressed')
+                if (homenavigationRef.current == null) {
+                  console.log("is null")
+                }
+                // homenavigationRef.current?.navigate('MovieDetailScreen', { movieID: item.id })
                 saveMovies(item)
               }}
             rippleColor="gray"
