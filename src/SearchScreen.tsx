@@ -1,30 +1,47 @@
-// MovieListScreen.js
 import React, { useEffect, useState } from 'react';
 import { View , ScrollView , FlatList ,StyleSheet} from 'react-native';
-import { getMovies } from './Api/getMovies';
-import { List, Text,Icon,Button, TouchableRipple} from 'react-native-paper';
-import ImageDisplay from './ImageDisplay';
-import { saveMovies } from '../database/saveMovies';
-import { homenavigationRef } from './App';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { getSearchResults } from './Api/getSearchResults';
+import { List, Text,Icon,Button, TouchableRipple, Searchbar} from 'react-native-paper';
 import Loader from './Loader';
+import ImageDisplay from './ImageDisplay';
+import { homenavigationRef } from './App';
 
-const MovieListScreen = ({ navigation }) => {
+
+const SearchScreen = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+
 
   useEffect(() => {
-    fetchMovies(page);
-  }, [page]);
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 500); // Delay of 500ms for debounce
 
-  const fetchMovies = async (page) => {
+    return () => {
+      clearTimeout(handler); // Clear timeout if query changes before 500ms
+    };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (debouncedQuery.trim() !== '') {
+      setIsLoading(true)
+      fetchSearchResults(debouncedQuery);
+    }
+  }, [debouncedQuery]);
+
+  const fetchSearchResults = async (query: string) => {
     try {
-      console.log("getting movies")
-      const data = await getMovies(page);
+      console.log(`Fetching results for: ${query}`);
+      const data = await getSearchResults(query);
+      console.log('Search Results:', data);
       setMovies(data.results);
       setIsLoading(false)
+      // Handle the search results as needed
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching search results:', error);
     }
   };
 
@@ -32,9 +49,17 @@ const MovieListScreen = ({ navigation }) => {
     return "https://image.tmdb.org/t/p/w500" + page
   };
 
+
+
   return (
+    <SafeAreaView>
+    <Searchbar
+      placeholder="Search"
+      onChangeText={setSearchQuery}
+      value={searchQuery}
+    />
     <View >
-      <Text variant="titleSmall"> Top Movies</Text>
+      <Text variant="titleSmall"> Result: </Text>
       {isLoading ? (
         <View style={styles.container}><Loader /></View> // Show a loading message when fetching movies
       ) : (
@@ -72,6 +97,8 @@ const MovieListScreen = ({ navigation }) => {
       />
       )}
     </View>
+
+    </SafeAreaView>
   );
 };
 
@@ -85,5 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default MovieListScreen;
+export default SearchScreen;

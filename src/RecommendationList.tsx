@@ -1,26 +1,29 @@
 // MovieListScreen.js
 import React, { useEffect, useState } from 'react';
 import { View , ScrollView , FlatList ,StyleSheet} from 'react-native';
-import { getMovies } from './Api/getMovies';
 import { List, Text,Icon,Button, TouchableRipple} from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
 import { saveMovies } from '../database/saveMovies';
 import { homenavigationRef } from './App';
 import Loader from './Loader';
 
-const MovieListScreen = ({ navigation }) => {
+import { getRecommandation } from './Api/getRecommandation';
+
+const RecommendationList = ({ movieID , navigation}) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true)
 
+
+
   useEffect(() => {
-    fetchMovies(page);
+    fetchMovies(movieID);
   }, [page]);
 
   const fetchMovies = async (page) => {
     try {
       console.log("getting movies")
-      const data = await getMovies(page);
+      const data = await getRecommandation(page);
       setMovies(data.results);
       setIsLoading(false)
     } catch (error) {
@@ -34,7 +37,7 @@ const MovieListScreen = ({ navigation }) => {
 
   return (
     <View >
-      <Text variant="titleSmall"> Top Movies</Text>
+      <Text variant="titleSmall"> Similar movie</Text>
       {isLoading ? (
         <View style={styles.container}><Loader /></View> // Show a loading message when fetching movies
       ) : (
@@ -86,4 +89,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default MovieListScreen;
+export default RecommendationList;

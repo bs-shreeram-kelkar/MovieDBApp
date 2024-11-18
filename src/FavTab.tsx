@@ -35,7 +35,7 @@ if (__DEV__ && Platform.OS === 'ios') {
 export default function FavTab() {
   const [data, setData] = React.useState(imageURLs);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <Button
         title="Clear Cache"
         onPress={() => {

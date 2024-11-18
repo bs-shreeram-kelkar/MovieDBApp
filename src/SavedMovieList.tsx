@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { View , ScrollView , FlatList} from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View , ScrollView , FlatList ,SafeAreaView} from 'react-native';
 import { List, Text,Icon,Button, TouchableRipple} from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
 import { getAllMovies } from '../database/getAllMovies';
+import { useFocusEffect } from '@react-navigation/native';
 
 const SavedMovieList = () => {
     const getImageURL = (page) => {
@@ -10,19 +11,39 @@ const SavedMovieList = () => {
       };
     
   const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    // Fetch all saved movies when the component mounts
-    const fetchMovies = async () => {
-      const allMovies = await getAllMovies();
-      console.log("herere");
-      console.log(allMovies);
-      setMovies(allMovies);
-    };
+  // useEffect(() => {
+  //   // Fetch all saved movies when the component mounts
+  //   const fetchMovies = async () => {
+  //     const allMovies = await getAllMovies();
+  //     console.log("herere");
+  //     console.log(allMovies);
+  //     setMovies(allMovies);
+  //   };
 
-    fetchMovies();
-  }, []);
+  //   fetchMovies();
+  // }, []);
+  
+  useFocusEffect(
+    useCallback(() => {
+      console.log('Screen is now focused!');
+      const fetchMovies = async () => {
+        const allMovies = await getAllMovies();
+        console.log("herere");
+        console.log(allMovies);
+        setMovies(allMovies);
+      };
+  
+      fetchMovies();
+  
+      return () => {
+        console.log('Screen is unfocused!');
+        // Cleanup if necessary
+      };
+    }, [])
+  );
 
   return (
+    <SafeAreaView>
     <View>
       <Text variant="titleSmall"> Saved Movies</Text>
       <FlatList
@@ -54,6 +75,7 @@ const SavedMovieList = () => {
         )}
       />
     </View>
+    </SafeAreaView>
   );
 };
 

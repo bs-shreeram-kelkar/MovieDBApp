@@ -18,6 +18,7 @@ import { Text } from 'react-native-paper'
 
 import ProfileScreen from './ProfileScreen';
 import UserDetailsTab from './UserDetailsTab';
+import SearchScreen from './SearchScreen';
 
 
 
@@ -29,18 +30,20 @@ const Tab = createBottomTabNavigator();
 export function TabScreen() {
   return (
     <Tab.Navigator
-      initialRouteName="HomeTab"
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
-          if (route.name === 'HomeTab') {
+          if (route.name === 'Home') {
             iconName = 'home-outline';
-          } else if (route.name === 'FavTab') {
+          } else if (route.name === 'Favourite') {
             iconName = 'information-circle-outline';
-          } else if (route.name == "ProfileScreen") {
+          } else if (route.name == "Profile") {
             iconName = "archive-outline"
-          } else if (route.name == "UserDetailsTab") {
+          } else if (route.name == "User") {
             iconName = "attach-outline"
+          } else if (route.name == "Search") {
+            iconName = "search"
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -49,10 +52,12 @@ export function TabScreen() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="HomeTab" component={HomeTabStack} />
-      <Tab.Screen name="FavTab" component={FavTab} />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
-      <Tab.Screen name="UserDetailsTab" component={UserDetailsTab} />
+      <Tab.Screen name="Home" options={{ headerLeft: () => null }} component={HomeTabStack} />
+      <Tab.Screen name="Favourite" component={FavTab} />
+      <Tab.Screen name="Search" component={SearchTabStack} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="User" component={UserDetailsTab} />
+
 
     </Tab.Navigator>
   );
@@ -70,6 +75,19 @@ function HomeTabStack() {
     </Stack.Navigator>
   );
 }
+
+function SearchTabStack() {
+  
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Search" options={{ headerLeft: () => null }} component={SearchScreen} />
+      <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
+
+    </Stack.Navigator>
+  );
+}
+
+
 
 function FavTab() {
     return (

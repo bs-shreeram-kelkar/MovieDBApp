@@ -1,12 +1,14 @@
+// apiFunctions.js
 import api from './api';  // Assuming your axios instance is in api.js
 
 // Function to get popular movies
-export const getMovieDetails = async (id = 912649) => {
-    const response = await api.post()
+export const getRecommandation = async (id) => {
   try {
-    let url = '/movie/' + id
-    console.log(url)
-    const response = await api.get('/movie/' + id, {
+    const url = '/movie/' + id + "/recommendations"
+    const response = await api.get(url, {
+      params: {
+        sort_by: 'popularity.desc',
+      },
       headers: {
         accept: 'application/json',
       },

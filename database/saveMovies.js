@@ -17,8 +17,10 @@ export const saveMovies = async (movie) => {
         movieRecord.backdrop_path = movie.backdrop_path
         movieRecord.vote_average = movie.vote_average.toString()
       });
+      return true
     });
     } catch (error) {
     console.error('Error saving movies:', error);
+    return false
   }
 };

@@ -1,13 +1,15 @@
 // MovieListScreen.js
 import React, { useEffect, useState } from 'react';
-import { View , ScrollView , FlatList} from 'react-native';
+import { View , ScrollView , FlatList ,StyleSheet} from 'react-native';
 import { getShows } from './Api/getShows';
 import { List, Text,Icon, TouchableRipple } from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
+import Loader from './Loader';
 
 const ShowsListScreen = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetchMovies(page);
@@ -18,6 +20,7 @@ const ShowsListScreen = () => {
       console.log("getting shows")
       const data = await getShows(page);
       setMovies(data.results);
+      setIsLoading(false)
     } catch (error) {
       console.error(error);
     }
@@ -30,6 +33,10 @@ const ShowsListScreen = () => {
   return (
     <View >
       <Text variant="titleSmall"> Top Shows</Text>
+      {isLoading ? (
+        <View style={styles.container}><Loader /></View> // Show a loading message when fetching movies
+      ) : (
+
       <FlatList
         horizontal
         data={movies}
@@ -54,8 +61,19 @@ const ShowsListScreen = () => {
           </TouchableRipple>
         )}
       />
+      )}
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+    alignItems: 'center',
+    height: 120
+  }
+});
+
 
 export default ShowsListScreen;
