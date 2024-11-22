@@ -1,12 +1,21 @@
 import { DefaultTheme } from 'react-native-paper';
 
-const theme = {
-    ...DefaultTheme,
-    colors: {
-        ...DefaultTheme.colors,
-        primary: '#040b29', // Custom primary color
-        accent: '#471539', // Custom accent color
-    },
+export const CombinedDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#040b29',
+    accent: '#471539',
+    background: '#FFFFFF',
+  },
 };
 
-export default theme;
+export const CombinedDarkTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#42f554',
+    accent: '#16451b',
+    background: '#00000',
+  },
+};
