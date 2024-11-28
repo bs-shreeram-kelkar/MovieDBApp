@@ -15,6 +15,8 @@ import RecommendationList from './src/RecommendationList';
 import SearchScreen from './src/SearchScreen';
 import MovieListScreen from './src/MovieListScreen';
 import { MMKV } from 'react-native-mmkv';
+import SideMenu from './src/SideMenu';
+import LiveShows from './src/LiveShows';
 
 // Wrap screens with BaseWrapper
 Navigation.registerComponent('com.myApp.LoginScreen', () => BaseWrapper(Login));
@@ -30,6 +32,14 @@ Navigation.registerComponent('com.myApp.MovieDetailsScreen', () => BaseWrapper(M
 Navigation.registerComponent('com.myApp.SearchScreen', () => BaseWrapper(SearchScreen));
 
 Navigation.registerComponent('com.myApp.MovieListScreen', () => BaseWrapper(MovieListScreen));
+
+Navigation.registerComponent('com.myApp.SideMenu', () => BaseWrapper(SideMenu));
+
+Navigation.registerComponent('com.myApp.LiveShows', () => BaseWrapper(LiveShows));
+
+
+
+
 
   export const mmkvStorage = new MMKV();
 
@@ -49,9 +59,9 @@ Navigation.events().registerAppLaunchedListener(() => {
                                 name: 'com.myApp.TabScreen',
                                 options: {
                                     topBar: {
-                                        visible: false, // Hide the top bar
-                                        drawBehind: true, // Draw the screen behind the top bar
-                                        animate: false, // Disable animation for hiding
+                                        visible: false,
+                                        drawBehind: true,
+                                        animate: false,
                                     },
                                 },
                             },
@@ -59,7 +69,6 @@ Navigation.events().registerAppLaunchedListener(() => {
                     ],
                 },
             },
-
         });
     } else {
         Navigation.setRoot({
@@ -71,8 +80,8 @@ Navigation.events().registerAppLaunchedListener(() => {
                                 name: 'com.myApp.LoginScreen',
                                 options: {
                                     topBar: {
-                                        visible: false, // Hide the top bar
-                                        drawBehind: true, // Draw the screen behind the top bar
+                                        visible: true, // Hide the top bar
+                                        drawBehind: false, // Draw the screen behind the top bar
                                         animate: false, // Disable animation for hiding
                                     },
                                 },
@@ -81,6 +90,6 @@ Navigation.events().registerAppLaunchedListener(() => {
                     ],
                 },
             },
-        }); 
+        });
     }
 });

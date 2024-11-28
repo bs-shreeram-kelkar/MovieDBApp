@@ -3,153 +3,179 @@ import { Navigation } from 'react-native-navigation';
 import Icon from 'react-native-vector-icons/Ionicons'; // Or any other vector icon package
 import { mmkvStorage } from '..';
 
-const TabScreen = () => {
-  // Load icons asynchronously
-  // const homeIcon = await Icon.getImageSource('home-outline', 30, '#000');
-  // const profileIcon = await Icon.getImageSource('person-outline', 30, '#000');
-  // const userDetailIcon = await Icon.getImageSource('attach-outline', 30, '#000');
-  // const savedMovieIcon = await Icon.getImageSource('information-circle-outline', 30, '#000');
-  // const searchMovieIcon = await Icon.getImageSource('search-outline', 30, '#000');
+const TabScreen = (props) => {
   const username = mmkvStorage.getString("username");
 
   // Set the root to bottom tab navigation
+  Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
+    if (buttonId === 'menuButton') {
+      Navigation.mergeOptions('ceter', {
+        sideMenu: {
+          left: {
+            visible: true, // Open the side menu
+          },
+        },
+      });
+    } else if (buttonId == 'searchButton') {
+      console.log("search clicked")
+    }
+  });
+
+  Navigation.events().registerNavigationButtonPressedListener(({ buttonId ,componentId}) => {
+    if (buttonId === 'backButton') {
+      Navigation.pop(componentId);
+    }
+  });
+
   Navigation.setRoot({
     root: {
-      bottomTabs: {
-        children: [
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'com.myApp.HomeScreen',
-                    options: {
-                      topBar: {
-                          visible: false, // Hide the top bar
-                          drawBehind: true, // Draw the screen behind the top bar
-                          animate: false, // Disable animation for hiding
-                      },
-                  },
-                  },
-                },
-              ],
-              options: {
-                bottomTab: {
-                  text: 'Home',
-                  icon: require('../assets/home.png'),
-                  iconColor: 'gray',
-                  selectedIconColor: 'blue',
-                },
-              },
+      id: 'centerStackView',
+      sideMenu: {
+          left: {
+            component: {
+              name: 'com.myApp.SideMenu', // Register the SideMenu component
             },
           },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'com.myApp.SavedMovieList',
-                    options: {
-                      topBar: {
-                          visible: false, // Hide the top bar
-                          drawBehind: true, // Draw the screen behind the top bar
-                          animate: false, // Disable animation for hiding
-                      },
-                  },
-                  },
+        center: {
+          id: 'centerStack',
+          bottomTabs: {
+            options: {
+              topBar: {
+                visible: true,
+                drawBehind: false,
+                animate: true,
+                title: {
+                  text: 'My App', // Shared title across all tabs
+                  color: 'black',
                 },
-              ],
-              options: {
-                bottomTab: {
-                  text: 'Saved Movies',
-                  icon: require('../assets/bookmark.png'),
-                  iconColor: 'gray',
-                  selectedIconColor: 'blue',
-
-                },
+                leftButtons: [
+                  {
+                    id: 'menuButton',
+                    icon: require('../assets/menu.png'), // Hamburger menu icon
+                    color: 'gray', // Icon color
+                  },
+                ],
+                rightButtons: [],
               },
             },
-          },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'com.myApp.SearchScreen',
-                    options: {
-                      topBar: {
-                          visible: false, // Hide the top bar
-                          drawBehind: true, // Draw the screen behind the top bar
-                          animate: false, // Disable animation for hiding
+            children: [
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'com.myApp.HomeScreen',
                       },
+                    },
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Home',
+                      icon: require('../assets/home.png'),
+                      iconColor: 'gray',
+                      selectedIconColor: 'blue',
+                    },
                   },
-                  },
-                },
-              ],
-              options: {
-                bottomTab: {
-                  text: 'Search',
-                  icon: require('../assets/search.png'),
-                  iconColor: 'gray',
-                  selectedIconColor: 'blue',
                 },
               },
-            },
-          },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'com.myApp.ProfileScreen',
-                    options: {
-                      topBar: {
-                          visible: false, // Hide the top bar
-                          drawBehind: true, // Draw the screen behind the top bar
-                          animate: false, // Disable animation for hiding
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'com.myApp.SavedMovieList',
                       },
+                    },
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Saved Movies',
+                      icon: require('../assets/bookmark.png'),
+                      iconColor: 'gray',
+                      selectedIconColor: 'blue',
+                    },
                   },
-                  },
-                },
-              ],
-              options: {
-                bottomTab: {
-                  text: username,
-                  icon: require('../assets/Person.png'),
-                  iconColor: 'gray',
-                  selectedIconColor: 'blue',
                 },
               },
-            },
-          },
-
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'com.myApp.UserDetails',
-                    options: {
-                      topBar: {
-                          visible: false, // Hide the top bar
-                          drawBehind: true, // Draw the screen behind the top bar
-                          animate: false, // Disable animation for hiding
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'com.myApp.SearchScreen',
                       },
+                    },
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Search',
+                      icon: require('../assets/search.png'),
+                      iconColor: 'gray',
+                      selectedIconColor: 'blue',
+                    },
                   },
-                  },
-                },
-              ],
-              options: {
-                bottomTab: {
-                  text: 'UserDetails',
-                  icon: require('../assets/settings.png'),
-                  iconColor: 'gray',
-                  selectedIconColor: 'blue',
                 },
               },
-            },
+              // {
+              //   stack: {
+              //     children: [
+              //       {
+              //         component: {
+              //           name: 'com.myApp.ProfileScreen',
+              //         },
+              //       },
+              //     ],
+              //     options: {
+              //       bottomTab: {
+              //         text: username || 'Profile',
+              //         icon: require('../assets/Person.png'),
+              //         iconColor: 'gray',
+              //         selectedIconColor: 'blue',
+              //       },
+              //     },
+              //   },
+              // },
+              // {
+              //   stack: {
+              //     children: [
+              //       {
+              //         component: {
+              //           name: 'com.myApp.UserDetails',
+              //         },
+              //       },
+              //     ],
+              //     options: {
+              //       bottomTab: {
+              //         text: 'UserDetails',
+              //         icon: require('../assets/settings.png'),
+              //         iconColor: 'gray',
+              //         selectedIconColor: 'blue',
+              //       },
+              //     },
+              //   },
+              // },
+              {
+                stack: {
+                  children: [
+                    {
+                      component: {
+                        name: 'com.myApp.LiveShows',
+                      },
+                    },
+                  ],
+                  options: {
+                    bottomTab: {
+                      text: 'Live Shows',
+                      icon: require('../assets/live_tv.png'),
+                      iconColor: 'gray',
+                      selectedIconColor: 'blue',
+                    },
+                  },
+                },
+              },
+            ],
           },
-        ],
+        },
       },
     },
   });

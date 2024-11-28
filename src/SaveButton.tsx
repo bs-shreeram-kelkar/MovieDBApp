@@ -4,7 +4,7 @@ import { isMoviePresent } from '../database/isMoviePresent';
 import { saveMovies } from '../database/saveMovies';
 import { removeMovie } from '../database/removeMovie';
 
-const MovieButton = ({ movie }) => {
+const MovieButton = ({ movie ,showSnackbar} ) => {
   const [isPresent, setIsPresent] = useState(false);
 
   // Check if the movie is already in the database
@@ -19,7 +19,10 @@ const MovieButton = ({ movie }) => {
   // Handle Save Movie
   const handleSave = async () => {
     const success = await saveMovies(movie);
-    if (success) setIsPresent(true);
+    if (success) {
+      setIsPresent(true);
+      showSnackbar();
+    }
   };
 
   // Handle Remove Movie

@@ -85,7 +85,15 @@ const SearchScreen = (props) => {
                         topBar: {
                           title: {
                             text: 'Details'
-                          }
+                          },
+                          rightButtons: [],
+                          leftButtons: [
+                            {
+                              id: 'backButton', // Back button
+                              icon: require('../assets/ChevronLeft.png'), // Replace with your back button icon
+                              color: 'gray', // Back button icon color
+                            },
+                          ], 
                         }
                       }
                     }

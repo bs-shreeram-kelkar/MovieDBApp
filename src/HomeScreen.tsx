@@ -16,14 +16,12 @@ import { Text } from 'react-native-paper';
 
 const HomeScreen = (props: NavigationProps) => {
   useEffect(() => {
-    console.log("tyhgnvruj")
     console.log(props)
   }, []);
 
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <ScrollView>
-        <Text> asdfasdf</Text>
         <MovieListScreen {...props}/>
         <ShowsListScreen />
       </ScrollView>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Button, TextInput, Card, RadioButton} from 'react-native-paper';
 import { setUsername, setEmail, setName } from './redux/userSlice';
@@ -11,6 +11,11 @@ const UserDetailsTab = () => {
   const { username, email, name } = useSelector((state) => state.user);
   const [value, setValue] = React.useState('dark');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("ythgfjdke")
+  }, []);
+
 
   const handleThemeChange = (newTheme) => {
     // console.log(newTheme)
@@ -63,7 +68,7 @@ const UserDetailsTab = () => {
                                     options: {
                                       topBar: {
                                           visible: false, // Hide the top bar
-                                          drawBehind: true, // Draw the screen behind the top bar
+                                          drawBehind: false, // Draw the screen behind the top bar
                                           animate: false, // Disable animation for hiding
                                       },
                                   },  

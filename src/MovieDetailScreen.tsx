@@ -7,6 +7,7 @@ import { FasterImageView } from '@candlefinance/faster-image';
 import { saveMovies } from '../database/saveMovies';
 import RecommendationList from './RecommendationList';
 import MovieButton from './SaveButton';
+import { toggleSideMenu } from './SideMenu';
 
 
 const MovieDetailScreen = ({props,id}) => {
@@ -15,6 +16,7 @@ const MovieDetailScreen = ({props,id}) => {
   const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
     fetchData(movieID);
+    toggleSideMenu()
   }, []);
 
 
@@ -35,32 +37,6 @@ const MovieDetailScreen = ({props,id}) => {
     }
   };
 
-  const handleLogin = async (movie) => {
-    const isSaved = await saveMovies(movie);
-    if (isSaved) {
-      console.log('Movie saved successfully!');
-      setVisible(true)
-    } else {
-      console.log('Failed to save the movie.');
-      setVisible(true)
-    }
-
-    };
-  const adsfasdf = (movie) => {
-    savemove123(movie)
-  }
-  const asdfkljf = {
-
-  }
-
-  const savemove123 = async (abc) => {
-    const isSaved = await saveMovies(movie);
-    if (isSaved) {
-      console.log('Movie saved successfully!');
-    } else {
-      console.log('Failed to save the movie.');
-    }
-  }
   const [visible, setVisible] = React.useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
@@ -98,7 +74,7 @@ const MovieDetailScreen = ({props,id}) => {
             {/* <Button icon="heart" mode="contained" onPress={() => {handleLogin(movieData)}} style={styles.button}>
             Add to WatchList
             </Button> */}
-            <MovieButton movie={movieData} />
+            <MovieButton movie={movieData} showSnackbar={() => setVisible(true)} />
             <Button icon="bookmark" mode="elevated" onPress={() => {}} style={styles.button}>
             Add to BookMark
             </Button>
@@ -113,7 +89,10 @@ const MovieDetailScreen = ({props,id}) => {
             ))}
           </View>
           <RecommendationList props={props} id={movieID} />
-          <Snackbar
+    </View>
+      )}
+      </ScrollView>
+      <Snackbar
           visible={visible}
           onDismiss={onDismissSnackBar}
           action={{
@@ -124,9 +103,7 @@ const MovieDetailScreen = ({props,id}) => {
           }}>
             Movie Added to watchList
       </Snackbar>
-    </View>
-      )}
-      </ScrollView>
+
     </SafeAreaView>
   );
 };
