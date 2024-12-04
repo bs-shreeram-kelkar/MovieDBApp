@@ -1,37 +1,30 @@
 // LiveShows.js
 import React, { useEffect, useState } from 'react';
-import { View,ScrollView,FlatList,StyleSheet } from 'react-native';
-import axios from 'axios';
-// import { List, Text } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { View,FlatList,StyleSheet } from 'react-native';
 import Loader from './Loader';
-import { NavigationProps } from 'react-native-navigation';
-import { List, Text,Icon, TouchableRipple} from 'react-native-paper';
+import { Text,TouchableRipple} from 'react-native-paper';
 import { getLiveShows } from './Api/getLiveShows';
 import ImageDisplay from './ImageDisplay';
 
-const LiveShows = (props: NavigationProps) => {
+const LiveShows = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   useEffect(() => {
-    console.log("vbncm")
+    console.log('vbncm');
     fetchShows(page);
   }, []);
 
-  const fetchShows = async (page) => {
+  const fetchShows = async (page: number) => {
     try {
-      console.log("getting shows")
-
       const data = await getLiveShows(page);
       setMovies((prevMovies) => [...prevMovies, ...data.results]);
-      console.log("hfturidjf")
+      console.log('hfturidjf');
       // setMovies(data.results)
       setIsFetchingMore(false);
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
       setIsFetchingMore(false);
@@ -39,7 +32,7 @@ const LiveShows = (props: NavigationProps) => {
   };
 
   const getImageURL = (page) => {
-    return "https://image.tmdb.org/t/p/w500" + page
+    return 'https://image.tmdb.org/t/p/w500' + page;
   };
 
   const loadMoreShows = () => {
@@ -47,7 +40,7 @@ const LiveShows = (props: NavigationProps) => {
       setIsFetchingMore(true);
       setPage((prevPage) => {
         const nextPage = prevPage + 1;
-        console.log(nextPage)
+        console.log(nextPage);
         fetchShows(nextPage);
         return nextPage;
       });
@@ -99,8 +92,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     padding: 16,
     alignItems: 'center',
-    height: 120
-  }
+    height: 120,
+  },
 });
 
 

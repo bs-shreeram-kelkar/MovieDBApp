@@ -4,6 +4,9 @@ import { TextInput, Button, Text, useTheme,HelperText} from 'react-native-paper'
 import AppDialog from './AppDialog';
 import { Navigation } from 'react-native-navigation';
 import { mmkvStorage } from '..';
+import { NavigationProps } from 'react-native-navigation';
+import { TAB_SCREEN } from '..';
+
 
 const Login = () => {
   const [userId, setUserId] = useState('');
@@ -14,13 +17,13 @@ const Login = () => {
   const hideDialog = () => setDialogVisible(false);
 
 
-  const handleLogin = (props) => {
+  const handleLogin = (props: NavigationProps) => {
     if (password === 'admin') {
       mmkvStorage.set('isLoggedIn', true);
       mmkvStorage.set('username',userId);
       Navigation.push(props.componentId, {
         component: {
-          name: 'com.myApp.TabScreen', // Push the screen registered with the 'Settings' key
+          name: TAB_SCREEN, // Push the screen registered with the 'Settings' key
           options: { // Optional options object to configure the screen
             topBar: {
               title: {

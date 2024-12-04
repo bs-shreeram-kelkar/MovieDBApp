@@ -6,6 +6,7 @@ import { View, StyleSheet,SafeAreaView } from 'react-native';
 import { setTheme } from './redux/themeSlice';
 import { Navigation } from 'react-native-navigation';
 import { mmkvStorage } from '..';
+import { navigateToLogin } from './navigateToLogin';
 
 const UserDetailsTab = () => {
   const { username, email, name } = useSelector((state) => state.user);
@@ -58,26 +59,7 @@ const UserDetailsTab = () => {
         <Card.Actions>
           <Button mode="contained" style={styles.button} onPress={() => {
               mmkvStorage.set('isLoggedIn', false);
-              Navigation.setRoot({
-                root: {
-                    stack: {
-                        children: [
-                            {
-                                component: {
-                                    name: 'com.myApp.LoginScreen',
-                                    options: {
-                                      topBar: {
-                                          visible: false, // Hide the top bar
-                                          drawBehind: false, // Draw the screen behind the top bar
-                                          animate: false, // Disable animation for hiding
-                                      },
-                                  },  
-                                },
-                            },
-                        ],
-                    },
-                },
-            });
+              navigateToLogin();
         }}>
             Logout
           </Button>

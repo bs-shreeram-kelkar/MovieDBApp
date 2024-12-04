@@ -3,15 +3,14 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet} from 'react-native';
 import { Text, Icon, TouchableRipple} from 'react-native-paper';
 import { Navigation } from 'react-native-navigation';
+import { NavigationProps } from 'react-native-navigation';
+import { PROFILE_SCREEN,USER_DETAILS } from '..';
 
-const SideMenu = (props) => {
-  useEffect(()=> {
-    console.log("ureigfdhjkn")
-  },[]
-  )
-  const handleMenuPress = (screenName) => {
+
+const SideMenu = (props: NavigationProps) => {
+
+  const handleMenuPress = (screenName: String) => {
   // Close the side menu
-    console.log(screenName)
     Navigation.setRoot({
       root: {
         sideMenu: {
@@ -66,7 +65,7 @@ const SideMenu = (props) => {
           </TouchableRipple>
           <TouchableRipple
             onPress={( ) => {
-              handleMenuPress('com.myApp.ProfileScreen');
+              handleMenuPress(PROFILE_SCREEN);
             }}
           >
           <View style={styles.row}>
@@ -76,7 +75,7 @@ const SideMenu = (props) => {
           </TouchableRipple>
           <TouchableRipple
             onPress={( ) => {
-              handleMenuPress('com.myApp.UserDetails');
+              handleMenuPress(USER_DETAILS);
             }}
           >
             <View style={styles.row}>
@@ -88,7 +87,7 @@ const SideMenu = (props) => {
       // </SafeAreaView>
     );
   };
-  
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -107,7 +106,7 @@ const SideMenu = (props) => {
       alignItems: 'center'
     }
   });
-  
+
 
 export const toggleSideMenu = () => {
   Navigation.mergeOptions('centerComponentId', {

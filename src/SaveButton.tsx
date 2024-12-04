@@ -4,12 +4,28 @@ import { isMoviePresent } from '../database/isMoviePresent';
 import { saveMovies } from '../database/saveMovies';
 import { removeMovie } from '../database/removeMovie';
 
-const MovieButton = ({ movie ,showSnackbar} ) => {
-  const [isPresent, setIsPresent] = useState(false);
+interface Movie {
+  id: number;
+  original_title: string;
+  backdrop_path: string;
+  overview: string;
+  genres: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
+interface MovieButtonProps {
+  movie: Movie;
+  showSnackbar: () => void;
+}
+
+const MovieButton: React.FC<MovieButtonProps> = ({ movie, showSnackbar }) => {
+  const [isPresent, setIsPresent] = useState<boolean>(false);
 
   // Check if the movie is already in the database
   useEffect(() => {
-    const checkMoviePresence = async () => {
+    const checkMoviePresence = async (): Promise<void> => {
       const result = await isMoviePresent(movie.id);
       setIsPresent(result);
     };
@@ -17,7 +33,7 @@ const MovieButton = ({ movie ,showSnackbar} ) => {
   }, [movie]);
 
   // Handle Save Movie
-  const handleSave = async () => {
+  const handleSave = async (): Promise<void> => {
     const success = await saveMovies(movie);
     if (success) {
       setIsPresent(true);
@@ -26,18 +42,16 @@ const MovieButton = ({ movie ,showSnackbar} ) => {
   };
 
   // Handle Remove Movie
-  const handleRemove = async () => {
+  const handleRemove = async (): Promise<void> => {
     const success = await removeMovie(movie.id);
-    console.log("vcvc")
-    console.log(success)
     if (success) {
-        setIsPresent(false);
+      setIsPresent(false);
     }
   };
 
   return (
     <Button
-      icon={isPresent ? "delete": "heart"}
+      icon={isPresent ? "delete" : "heart"}
       mode="contained"
       onPress={isPresent ? handleRemove : handleSave}
       style={{ margin: 8 }}

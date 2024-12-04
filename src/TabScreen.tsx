@@ -1,43 +1,43 @@
-import React from 'react';
 import { Navigation } from 'react-native-navigation';
-import Icon from 'react-native-vector-icons/Ionicons'; // Or any other vector icon package
 import { mmkvStorage } from '..';
+import { SIDE_MENU,HOME_SCREEN,SAVED_MOVIE_LIST,SEARCH_SCREEN,LIVE_SHOWS } from '..';
 
-const TabScreen = (props) => {
-  const username = mmkvStorage.getString("username");
+interface NavigationButtonPressedEvent {
+  buttonId: string;
+  componentId?: string;
+}
 
+const TabScreen = (): void => {
   // Set the root to bottom tab navigation
-  Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
+  Navigation.events().registerNavigationButtonPressedListener(({ buttonId }: NavigationButtonPressedEvent) => {
     if (buttonId === 'menuButton') {
-      Navigation.mergeOptions('ceter', {
+      Navigation.mergeOptions('centerStackView', {
         sideMenu: {
           left: {
-            visible: true, // Open the side menu
+            visible: true,
           },
         },
       });
-    } else if (buttonId == 'searchButton') {
-      console.log("search clicked")
+    } else if (buttonId === 'searchButton') {
+      console.log("search clicked");
     }
   });
 
-  Navigation.events().registerNavigationButtonPressedListener(({ buttonId ,componentId}) => {
-    if (buttonId === 'backButton') {
+  Navigation.events().registerNavigationButtonPressedListener(({ buttonId, componentId }: NavigationButtonPressedEvent) => {
+    if (buttonId === 'backButton' && componentId) {
       Navigation.pop(componentId);
     }
   });
 
   Navigation.setRoot({
     root: {
-      id: 'centerStackView',
       sideMenu: {
           left: {
             component: {
-              name: 'com.myApp.SideMenu', // Register the SideMenu component
+              name: SIDE_MENU,
             },
           },
         center: {
-          id: 'centerStack',
           bottomTabs: {
             options: {
               topBar: {
@@ -45,14 +45,14 @@ const TabScreen = (props) => {
                 drawBehind: false,
                 animate: true,
                 title: {
-                  text: 'My App', // Shared title across all tabs
+                  text: 'My App',
                   color: 'black',
                 },
                 leftButtons: [
                   {
                     id: 'menuButton',
-                    icon: require('../assets/menu.png'), // Hamburger menu icon
-                    color: 'gray', // Icon color
+                    icon: require('../assets/menu.png'),
+                    color: 'gray',
                   },
                 ],
                 rightButtons: [],
@@ -64,7 +64,7 @@ const TabScreen = (props) => {
                   children: [
                     {
                       component: {
-                        name: 'com.myApp.HomeScreen',
+                        name: HOME_SCREEN,
                       },
                     },
                   ],
@@ -83,7 +83,7 @@ const TabScreen = (props) => {
                   children: [
                     {
                       component: {
-                        name: 'com.myApp.SavedMovieList',
+                        name: SAVED_MOVIE_LIST,
                       },
                     },
                   ],
@@ -102,7 +102,7 @@ const TabScreen = (props) => {
                   children: [
                     {
                       component: {
-                        name: 'com.myApp.SearchScreen',
+                        name: SEARCH_SCREEN,
                       },
                     },
                   ],
@@ -116,50 +116,12 @@ const TabScreen = (props) => {
                   },
                 },
               },
-              // {
-              //   stack: {
-              //     children: [
-              //       {
-              //         component: {
-              //           name: 'com.myApp.ProfileScreen',
-              //         },
-              //       },
-              //     ],
-              //     options: {
-              //       bottomTab: {
-              //         text: username || 'Profile',
-              //         icon: require('../assets/Person.png'),
-              //         iconColor: 'gray',
-              //         selectedIconColor: 'blue',
-              //       },
-              //     },
-              //   },
-              // },
-              // {
-              //   stack: {
-              //     children: [
-              //       {
-              //         component: {
-              //           name: 'com.myApp.UserDetails',
-              //         },
-              //       },
-              //     ],
-              //     options: {
-              //       bottomTab: {
-              //         text: 'UserDetails',
-              //         icon: require('../assets/settings.png'),
-              //         iconColor: 'gray',
-              //         selectedIconColor: 'blue',
-              //       },
-              //     },
-              //   },
-              // },
               {
                 stack: {
                   children: [
                     {
                       component: {
-                        name: 'com.myApp.LiveShows',
+                        name: LIVE_SHOWS,
                       },
                     },
                   ],

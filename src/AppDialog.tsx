@@ -2,7 +2,14 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Dialog, Portal, Text,Button } from 'react-native-paper';
 
-const AppDialog = ({ visible, onDismiss, title, message }) => {
+interface AppDialogProps {
+  visible: boolean;
+  onDismiss: () => void;
+  title: string;
+  message: string;
+}
+
+const AppDialog: React.FC<AppDialogProps> = ({ visible, onDismiss, title, message }) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss}>
