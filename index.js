@@ -11,7 +11,6 @@ import UserDetailsTab from './src/UserDetailsTab';
 
 import MovieDetailScreen from './src/MovieDetailScreen';
 
-import RecommendationList from './src/RecommendationList';
 import SearchScreen from './src/SearchScreen';
 import MovieListScreen from './src/MovieListScreen';
 import { MMKV } from 'react-native-mmkv';

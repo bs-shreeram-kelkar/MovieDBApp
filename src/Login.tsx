@@ -17,18 +17,18 @@ const Login = () => {
   const handleLogin = (props) => {
     if (password === 'admin') {
       mmkvStorage.set('isLoggedIn', true);
-      mmkvStorage.set("username",userId)
+      mmkvStorage.set('username',userId);
       Navigation.push(props.componentId, {
         component: {
           name: 'com.myApp.TabScreen', // Push the screen registered with the 'Settings' key
           options: { // Optional options object to configure the screen
             topBar: {
               title: {
-                text: 'Tab Screen' // Set the TopBar title of the new Screen
-              }
-            }
-          }
-        }
+                text: 'Tab Screen', // Set the TopBar title of the new Screen
+              },
+            },
+          },
+        },
       });
 
     } else {

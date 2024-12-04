@@ -1,7 +1,6 @@
 import React from 'react';
 import { PaperProvider } from 'react-native-paper';
-import { Platform, StatusBar } from 'react-native';
-import theme from './theme';
+import { StatusBar } from 'react-native';
 import database from './database';
 import { useSelector } from 'react-redux';
 import { Provider } from 'react-redux';
@@ -20,6 +19,7 @@ const BaseWrapper = (Component) => (props) => {
         </Provider>
     );
 
+    // eslint-disable-next-line react/no-unstable-nested-components
     function ThemedApp() {
         const theme = useSelector((state) => state.theme.theme);
         const selectedTheme = theme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme;
