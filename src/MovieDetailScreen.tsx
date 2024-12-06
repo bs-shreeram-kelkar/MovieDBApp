@@ -2,10 +2,10 @@ import React, {useEffect , useState} from 'react';
 import { SafeAreaView, StyleSheet, View, ScrollView} from 'react-native';
 import { Text, Button, Chip , Snackbar} from 'react-native-paper';
 import { getMovieDetails } from './Api/getMovieDetails';
-import Loader from './Loader';
+import LoaderComponent from './Components/Loader';
 import { FasterImageView } from '@candlefinance/faster-image';
 import RecommendationList from './RecommendationList';
-import MovieButton from './SaveButton';
+import MovieButtonComponent from './Components/SaveButton';
 import { toggleSideMenu } from './SideMenu';
 import { NavigationProps } from 'react-native-navigation';
 
@@ -56,7 +56,7 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ props, id }) => {
     <SafeAreaView>
       <ScrollView>
         {isLoading ? (
-          <View style={styles.container}><Loader /></View>
+          <View style={styles.container}><LoaderComponent /></View>
         ) : (
           movieData && (
             <View style={styles.container}>
@@ -83,7 +83,7 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ props, id }) => {
               <Text variant="labelMedium">
                 {movieData.overview}
               </Text>
-              <MovieButton movie={movieData} showSnackbar={() => setVisible(true)} />
+              <MovieButtonComponent movie={movieData} showSnackbar={() => setVisible(true)} />
               <Button icon="bookmark" mode="elevated" onPress={() => {}} style={styles.button as any}>
                 Add to BookMark
               </Button>

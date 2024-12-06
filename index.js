@@ -44,7 +44,7 @@ Screens.forEach((ScreenComponent, key): void => {
 });
 
 export const mmkvStorage = new MMKV();
-import { navigateToLogin } from './src/navigateToLogin';
+import { navigateToLogin } from './src/Navigation/navigateToLogin';
 
 Navigation.events().registerAppLaunchedListener((): void => {
     const isLoggedIn: boolean = mmkvStorage.getBoolean('isLoggedIn');

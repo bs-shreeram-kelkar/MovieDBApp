@@ -6,7 +6,7 @@ import { View, StyleSheet,SafeAreaView } from 'react-native';
 import { setTheme } from './redux/themeSlice';
 import { Navigation } from 'react-native-navigation';
 import { mmkvStorage } from '..';
-import { navigateToLogin } from './navigateToLogin';
+import { navigateToLogin } from './Navigation/navigateToLogin';
 
 const UserDetailsTab = () => {
   const { username, email, name } = useSelector((state) => state.user);

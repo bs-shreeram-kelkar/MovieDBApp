@@ -3,10 +3,10 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSearchResults } from './Api/getSearchResults';
 import { Text, Icon, TouchableRipple, Searchbar } from 'react-native-paper';
-import Loader from './Loader';
+import LoaderComponent from './Components/Loader';
 import ImageDisplay from './ImageDisplay';
 import { Navigation, NavigationProps } from 'react-native-navigation';
-import MovieCard from './MovieCard';
+import MovieCardComponent from './Components/MovieCard';
 
 interface Movie {
   id: number;
@@ -69,14 +69,14 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ componentId, props }) => {
       <View style={{padding: 16}}>
         <Text variant="titleSmall"> Result: </Text>
         {isLoading ? (
-          <View style={styles.container}><Loader /></View>
+          <View style={styles.container}><LoaderComponent /></View>
         ) : (
           <FlatList
             horizontal
             data={movies}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <MovieCard
+              <MovieCardComponent
                 props={{componentId}}
                 item={item}
                 getImageURL={getImageURL}

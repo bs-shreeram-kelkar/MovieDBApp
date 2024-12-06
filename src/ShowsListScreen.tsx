@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { getShows } from './Api/getShows';
 import { Text, Icon, TouchableRipple } from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
-import Loader from './Loader';
+import LoaderComponent from './Components/Loader';
 
 interface Show {
   id: number;
@@ -40,7 +40,7 @@ const ShowsListScreen: React.FC = () => {
     <View>
       <Text variant="titleSmall"> Top Shows</Text>
       {isLoading ? (
-        <View style={styles.container}><Loader /></View>
+        <View style={styles.container}><LoaderComponent /></View>
       ) : (
         <FlatList
           horizontal

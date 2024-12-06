@@ -10,6 +10,7 @@ import { DatabaseProvider } from '@nozbe/watermelondb/DatabaseProvider';
 
 
 
+
 const BaseWrapper = (Component) => (props) => {
     // const theme = useSelector((state) => state.theme.theme);
     // const selectedTheme = theme === 'dark' ? CombinedDarkTheme : CombinedDefaultTheme;

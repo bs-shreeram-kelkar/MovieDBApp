@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { MOVIE_DETAILS_SCREEN } from '..';
+import { MOVIE_DETAILS_SCREEN } from '../..';
 
 export const navigateToMovieDetails = (componentId, props, movieId) => {
     Navigation.push(componentId, {
@@ -18,7 +18,7 @@ export const navigateToMovieDetails = (componentId, props, movieId) => {
             leftButtons: [
               {
                 id: 'backButton',
-                icon: require('../assets/ChevronLeft.png'),
+                icon: require('../../assets/ChevronLeft.png'),
                 color: 'gray',
               },
             ],

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, Button, Text, useTheme,HelperText} from 'react-native-paper';
-import AppDialog from './AppDialog';
+import AppDialogComponent from './Components/AppDialog';
 import { Navigation } from 'react-native-navigation';
 import { mmkvStorage } from '..';
 import { NavigationProps } from 'react-native-navigation';
@@ -67,7 +67,7 @@ const Login = () => {
       <Button mode="contained" onPress={handleLogin} style={styles.button}>
         Login
       </Button>
-      <AppDialog
+      <AppDialogComponent
         visible={dialogVisible}
         onDismiss={hideDialog}
         title="Login Failed"

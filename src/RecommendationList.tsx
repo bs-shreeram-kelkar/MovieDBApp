@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Text, Icon, TouchableRipple } from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
-import Loader from './Loader';
+import LoaderComponent from './Components/Loader';
 import { getRecommandation } from './Api/getRecommandation';
 import { NavigationProps } from 'react-native-navigation';
-import MovieCard from './MovieCard';
+import MovieCardComponent from './Components/MovieCard';
 
 interface Movie {
   id: number;
@@ -47,14 +47,14 @@ const RecommendationList: React.FC<RecommendationListProps> = ({ props, id }) =>
     <View>
       <Text variant="titleSmall">Similar movie</Text>
       {isLoading ? (
-        <View style={styles.container}><Loader /></View>
+        <View style={styles.container}><LoaderComponent /></View>
       ) : (
         <FlatList
           horizontal
           data={movies}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <MovieCard
+            <MovieCardComponent
               props={props}
               item={item}
               getImageURL={getImageURL}

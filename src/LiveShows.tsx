@@ -1,7 +1,7 @@
 // LiveShows.js
 import React, { useEffect, useState } from 'react';
 import { View,FlatList,StyleSheet } from 'react-native';
-import Loader from './Loader';
+import LoaderComponent from './Components/Loader';
 import { Text,TouchableRipple} from 'react-native-paper';
 import { getLiveShows } from './Api/getLiveShows';
 import ImageDisplay from './ImageDisplay';
@@ -54,7 +54,7 @@ const LiveShows = () => {
       <View >
       <Text variant="titleSmall"> Live Shows</Text>
       {isLoading ? (
-        <View style={styles.container}><Loader /></View> // Show a loading message when fetching movies
+        <View style={styles.container}><LoaderComponent /></View> // Show a loading message when fetching movies
       ) : (
 
       <FlatList

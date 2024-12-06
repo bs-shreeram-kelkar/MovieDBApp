@@ -9,7 +9,7 @@ interface AppDialogProps {
   message: string;
 }
 
-const AppDialog: React.FC<AppDialogProps> = ({ visible, onDismiss, title, message }) => {
+const AppDialogComponent: React.FC<AppDialogProps> = ({ visible, onDismiss, title, message }) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss}>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppDialog;
+export default AppDialogComponent;

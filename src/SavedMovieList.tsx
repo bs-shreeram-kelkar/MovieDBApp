@@ -4,8 +4,8 @@ import { Text, Icon, TouchableRipple } from 'react-native-paper';
 import ImageDisplay from './ImageDisplay';
 import { getAllMovies } from '../database/getAllMovies';
 import { Navigation, NavigationProps } from 'react-native-navigation';
-import Loader from './Loader';
-import MovieCard from './MovieCard';
+import LoaderComponent from './Components/Loader';
+import MovieCardComponent from './Components/MovieCard';
 
 interface Movie {
   id: number;
@@ -54,14 +54,14 @@ const SavedMovieList: React.FC<SavedMovieListProps> = ({ componentId }) => {
       <View style={{padding: 16}}>
         <Text variant="titleSmall"> Saved Movies</Text>
         {isLoading ? (
-          <View style={styles.container}><Loader /></View>
+          <View style={styles.container}><LoaderComponent /></View>
         ) : (
           <FlatList
             horizontal
             data={movies}
             keyExtractor={(item: Movie) => item.id.toString()}
             renderItem={({ item }: { item: Movie }) => (
-              <MovieCard
+              <MovieCardComponent
                 props={{componentId}}
                 item={item}
                 getImageURL={getImageURL}

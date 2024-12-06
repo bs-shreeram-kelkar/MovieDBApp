@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { LOGIN_SCREEN } from '..';
+import { LOGIN_SCREEN } from '../..';
 
 export const navigateToLogin = () => {
     Navigation.setRoot({

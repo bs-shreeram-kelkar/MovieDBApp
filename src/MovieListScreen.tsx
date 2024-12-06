@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { getMovies } from './Api/getMovies';
-import { Text, Icon, TouchableRipple } from 'react-native-paper';
-import ImageDisplay from './ImageDisplay';
-import Loader from './Loader';
-import { Navigation, NavigationProps } from 'react-native-navigation';
-import MovieCard from './MovieCard';
+import { Text } from 'react-native-paper';
+import LoaderComponent from './Components/Loader';
+import { NavigationProps } from 'react-native-navigation';
+import MovieCardComponent from './Components/MovieCard';
 
 interface Movie {
   id: number;
@@ -25,7 +24,7 @@ const MovieListScreen: React.FC<NavigationProps> = (props: NavigationProps) => {
 
   const fetchMovies = async (pageNum: number): Promise<void> => {
     try {
-      console.log("getting movies");
+      console.log('getting movies');
       const data = await getMovies(pageNum);
       setMovies(data.results);
       setIsLoading(false);
@@ -35,21 +34,21 @@ const MovieListScreen: React.FC<NavigationProps> = (props: NavigationProps) => {
   };
 
   const getImageURL = (path: string): string => {
-    return "https://image.tmdb.org/t/p/w500" + path;
+    return 'https://image.tmdb.org/t/p/w500' + path;
   };
 
   return (
     <View>
       <Text variant="titleSmall"> Top Movies</Text>
       {isLoading ? (
-        <View style={styles.container}><Loader /></View> // Show a loading message when fetching movies
+        <View style={styles.container}><LoaderComponent /></View> // Show a loading message when fetching movies
       ) : (
         <FlatList
           horizontal
           data={movies}
           keyExtractor={(item: Movie) => item.id.toString()}
           renderItem={({ item }: { item: Movie }) => (
-            <MovieCard
+            <MovieCardComponent
               props={props}
               item={item}
               getImageURL={getImageURL}
@@ -67,8 +66,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 16,
     alignItems: 'center',
-    height: 120
-  }
+    height: 120,
+  },
 });
 
 export default MovieListScreen;

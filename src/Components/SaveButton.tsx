@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native-paper';
-import { isMoviePresent } from '../database/isMoviePresent';
-import { saveMovies } from '../database/saveMovies';
-import { removeMovie } from '../database/removeMovie';
+import { isMoviePresent } from '../../database/isMoviePresent';
+import { saveMovies } from '../../database/saveMovies';
+import { removeMovie } from '../../database/removeMovie';
 
 interface Movie {
   id: number;
@@ -20,7 +20,7 @@ interface MovieButtonProps {
   showSnackbar: () => void;
 }
 
-const MovieButton: React.FC<MovieButtonProps> = ({ movie, showSnackbar }) => {
+const MovieButtonComponent: React.FC<MovieButtonProps> = ({ movie, showSnackbar }) => {
   const [isPresent, setIsPresent] = useState<boolean>(false);
 
   // Check if the movie is already in the database
@@ -61,4 +61,4 @@ const MovieButton: React.FC<MovieButtonProps> = ({ movie, showSnackbar }) => {
   );
 };
 
-export default MovieButton;
+export default MovieButtonComponent;

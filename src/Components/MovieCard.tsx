@@ -2,8 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text, TouchableRipple, Icon } from 'react-native-paper';
 import { NavigationProps } from 'react-native-navigation';
-import ImageDisplay from './ImageDisplay';
-import { navigateToMovieDetails } from './navigateToMovieDetails';
+import ImageDisplay from '../ImageDisplay';
+import { navigateToMovieDetails } from '../Navigation/navigateToMovieDetails';
 
 interface MovieCardProps {
   props: NavigationProps;
@@ -16,7 +16,7 @@ interface MovieCardProps {
   getImageURL: (path: string) => string;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ props, item, getImageURL }) => {
+const MovieCardComponent: React.FC<MovieCardProps> = ({ props, item, getImageURL }) => {
   return (
     <TouchableRipple
       onPress={() => {
@@ -40,4 +40,4 @@ const MovieCard: React.FC<MovieCardProps> = ({ props, item, getImageURL }) => {
   );
 };
 
-export default MovieCard;
+export default MovieCardComponent;
