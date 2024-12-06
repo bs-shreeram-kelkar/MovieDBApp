@@ -15,7 +15,6 @@ export const getShows = async (page = 1) => {
         accept: 'application/json',
       },
     });
-    console.log("got success")
     return response.data;
   } catch (error) {
     console.error('Error fetching popular movies:', error);

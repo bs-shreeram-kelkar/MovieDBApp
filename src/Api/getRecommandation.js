@@ -13,7 +13,6 @@ export const getRecommandation = async (id) => {
         accept: 'application/json',
       },
     });
-    console.log("got success")
     return response.data;
   } catch (error) {
     console.error('Error fetching popular movies:', error);

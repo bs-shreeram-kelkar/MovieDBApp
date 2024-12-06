@@ -24,7 +24,6 @@ const MovieListScreen: React.FC<NavigationProps> = (props: NavigationProps) => {
 
   const fetchMovies = async (pageNum: number): Promise<void> => {
     try {
-      console.log('getting movies');
       const data = await getMovies(pageNum);
       setMovies(data.results);
       setIsLoading(false);

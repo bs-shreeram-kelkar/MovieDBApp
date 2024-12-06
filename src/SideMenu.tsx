@@ -1,5 +1,5 @@
 // SideMenu.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet} from 'react-native';
 import { Text, Icon, TouchableRipple} from 'react-native-paper';
 import { Navigation } from 'react-native-navigation';

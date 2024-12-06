@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { Text, Icon, TouchableRipple } from 'react-native-paper';
-import ImageDisplay from './ImageDisplay';
+import { Text } from 'react-native-paper';
 import LoaderComponent from './Components/Loader';
 import { getRecommandation } from './Api/getRecommandation';
 import { NavigationProps } from 'react-native-navigation';

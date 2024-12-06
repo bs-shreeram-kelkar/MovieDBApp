@@ -13,7 +13,6 @@ const LiveShows = () => {
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   useEffect(() => {
-    console.log('vbncm');
     fetchShows(page);
   }, []);
 
@@ -21,8 +20,6 @@ const LiveShows = () => {
     try {
       const data = await getLiveShows(page);
       setMovies((prevMovies) => [...prevMovies, ...data.results]);
-      console.log('hfturidjf');
-      // setMovies(data.results)
       setIsFetchingMore(false);
       setIsLoading(false);
     } catch (error) {
@@ -40,7 +37,6 @@ const LiveShows = () => {
       setIsFetchingMore(true);
       setPage((prevPage) => {
         const nextPage = prevPage + 1;
-        console.log(nextPage);
         fetchShows(nextPage);
         return nextPage;
       });

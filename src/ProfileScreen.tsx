@@ -1,6 +1,6 @@
-import React , {useEffect, useState} from 'react';
+import React  from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text, Button, TextInput, Card, Title } from 'react-native-paper';
+import { Button, TextInput, Card, Title } from 'react-native-paper';
 import { setUsername, setEmail, setName } from './redux/userSlice';
 import { View, StyleSheet } from 'react-native';
 
@@ -8,9 +8,6 @@ const ProfileScreen = () => {
   const { username, email, name } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('cxzvsdf')
-  }, [])
 
   return (
     <View style={styles.container}>

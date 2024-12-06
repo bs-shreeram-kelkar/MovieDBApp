@@ -14,7 +14,6 @@ export const getSearchResults = async (value) => {
         accept: 'application/json',
       },
     });
-    console.log("got success")
     return response.data;
   } catch (error) {
     console.error('Error fetching popular movies:', error);

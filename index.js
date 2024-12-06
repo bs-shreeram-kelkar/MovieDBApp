@@ -25,7 +25,7 @@ export const MOVIE_LIST_SCREEN = 'com.myApp.MovieListScreen';
 export const SIDE_MENU = 'com.myApp.SideMenu';
 export const LIVE_SHOWS = 'com.myApp.LiveShows';
 
-export const Screens: Map<string, React.ComponentType> = new Map();
+export const Screens = new Map();
 
 Screens.set(LOGIN_SCREEN, Login);
 Screens.set(PROFILE_SCREEN, ProfileScreen);
@@ -39,15 +39,15 @@ Screens.set(MOVIE_LIST_SCREEN, MovieListScreen);
 Screens.set(SIDE_MENU, SideMenu);
 Screens.set(LIVE_SHOWS, LiveShows);
 
-Screens.forEach((ScreenComponent, key): void => {
+Screens.forEach((ScreenComponent, key) => {
     Navigation.registerComponent(key, () => BaseWrapper(ScreenComponent));
 });
 
 export const mmkvStorage = new MMKV();
 import { navigateToLogin } from './src/Navigation/navigateToLogin';
 
-Navigation.events().registerAppLaunchedListener((): void => {
-    const isLoggedIn: boolean = mmkvStorage.getBoolean('isLoggedIn');
+Navigation.events().registerAppLaunchedListener(() => {
+    const isLoggedIn = mmkvStorage.getBoolean('isLoggedIn');
     if (isLoggedIn) {
         Navigation.setRoot({
             root: {

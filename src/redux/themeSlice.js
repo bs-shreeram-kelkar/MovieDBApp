@@ -9,8 +9,6 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     setTheme: (state, action) => {
-        // console.log("here")
-        // console.log(state.theme)
       state.theme = action.payload;
     },
   },

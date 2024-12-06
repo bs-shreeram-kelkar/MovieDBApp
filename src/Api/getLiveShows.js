@@ -4,7 +4,6 @@ import api from './api';  // Assuming your axios instance is in api.js
 export const getLiveShows = async (page: 1) => {
   try {
     let url = 'tv/airing_today'
-    console.log(url)
     const response = await api.get(url, {
         params: {
             include_adult: false,

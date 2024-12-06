@@ -1,5 +1,4 @@
 import { Navigation } from 'react-native-navigation';
-import { mmkvStorage } from '..';
 import { SIDE_MENU,HOME_SCREEN,SAVED_MOVIE_LIST,SEARCH_SCREEN,LIVE_SHOWS } from '..';
 
 interface NavigationButtonPressedEvent {
@@ -19,7 +18,7 @@ const TabScreen = (): void => {
         },
       });
     } else if (buttonId === 'searchButton') {
-      console.log("search clicked");
+      // never here
     }
   });
 

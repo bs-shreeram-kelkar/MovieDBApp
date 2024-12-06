@@ -4,8 +4,6 @@ import Movie from "../models/Movie";
 export const saveMovies = async (movie) => {
   try {
     return await database.write(async () => {
-      console.log(movie.id)
-      console.log(movie.vote_average.toString())
       await database.collections.get('movies').create((movieRecord) => {
         movieRecord._raw.id = movie.id.toString() // Use `_raw` to access WatermelonDB's `id`
         movieRecord.movieId = movie.movieId

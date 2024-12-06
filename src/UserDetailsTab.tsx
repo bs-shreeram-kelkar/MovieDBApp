@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text, Button, TextInput, Card, RadioButton} from 'react-native-paper';
-import { setUsername, setEmail, setName } from './redux/userSlice';
+import { Text, Button, Card, RadioButton} from 'react-native-paper';
 import { View, StyleSheet,SafeAreaView } from 'react-native';
 import { setTheme } from './redux/themeSlice';
-import { Navigation } from 'react-native-navigation';
 import { mmkvStorage } from '..';
 import { navigateToLogin } from './Navigation/navigateToLogin';
 
@@ -13,13 +11,9 @@ const UserDetailsTab = () => {
   const [value, setValue] = React.useState('dark');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("ythgfjdke")
-  }, []);
 
 
   const handleThemeChange = (newTheme) => {
-    // console.log(newTheme)
     dispatch(setTheme(newTheme)); // Dispatch the theme change
     setValue(newTheme)
   };

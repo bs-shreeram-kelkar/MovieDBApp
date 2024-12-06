@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSearchResults } from './Api/getSearchResults';
-import { Text, Icon, TouchableRipple, Searchbar } from 'react-native-paper';
+import { Text, Searchbar } from 'react-native-paper';
 import LoaderComponent from './Components/Loader';
-import ImageDisplay from './ImageDisplay';
-import { Navigation, NavigationProps } from 'react-native-navigation';
+import { NavigationProps } from 'react-native-navigation';
 import MovieCardComponent from './Components/MovieCard';
 
 interface Movie {
@@ -45,9 +44,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ componentId, props }) => {
 
   const fetchSearchResults = async (query: string): Promise<void> => {
     try {
-      console.log(`Fetching results for: ${query}`);
       const data = await getSearchResults(query);
-      console.log('Search Results:', data);
       setMovies(data.results);
       setIsLoading(false);
     } catch (error) {

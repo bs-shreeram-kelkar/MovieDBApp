@@ -41,7 +41,6 @@ const MovieDetailScreen: React.FC<MovieDetailScreenProps> = ({ props, id }) => {
 
   const fetchData = async (movieID: string): Promise<void> => {
     try {
-      console.log('getting shows');
       const data = await getMovieDetails(parseInt(movieID, 10));
       setMovieData(data);
       setIsLoading(false);

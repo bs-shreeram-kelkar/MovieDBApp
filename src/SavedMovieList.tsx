@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
-import { Text, Icon, TouchableRipple } from 'react-native-paper';
-import ImageDisplay from './ImageDisplay';
+import { Text } from 'react-native-paper';
 import { getAllMovies } from '../database/getAllMovies';
-import { Navigation, NavigationProps } from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 import LoaderComponent from './Components/Loader';
 import MovieCardComponent from './Components/MovieCard';
 
@@ -30,7 +29,6 @@ const SavedMovieList: React.FC<SavedMovieListProps> = ({ componentId }) => {
     const navigationListener = Navigation.events().registerComponentListener(
       {
         componentDidAppear: async () => {
-          console.log('Screen is now focused!');
           const allMovies = await getAllMovies();
           setMovies(allMovies as Movie[]);
           setIsLoading(false);
